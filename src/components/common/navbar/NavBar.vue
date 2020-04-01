@@ -17,7 +17,7 @@
   color: #fff;
   font-size: 18px;
   line-height: 19px;
-  background-color: #d81e06;
+  background-color: #ff699c;
   position: fixed;
   top: 0;
   left: 0;
