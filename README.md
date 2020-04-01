@@ -1,3 +1,4 @@
+### 这是个人练习的项目
 # suppermall
 
 ## Project setup
@@ -17,3 +18,5 @@ npm run build
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
