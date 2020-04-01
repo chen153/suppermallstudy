@@ -11,7 +11,7 @@
 </script>
 
 <style scoped>
-@import "../../../src/assets/css/base.css";
+@import "~assets/css/base.css";
 .tabbar{
   width: 100%;
   display: flex;

@@ -47,4 +47,7 @@
 .active{
   color: #ff131c;
 }
+.tabbar-item{
+  text-align: center;
+}
 </style>
