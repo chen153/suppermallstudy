@@ -6,6 +6,7 @@ export function getHomeMultiData() {
   })
 }
 export function getHomeGoods(type, page) {
+  console.log('type, page', type, page)
   return requests({
     url: '/home/data',
     params: {

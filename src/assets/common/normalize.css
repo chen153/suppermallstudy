@@ -347,3 +347,10 @@ template {
 [hidden] {
   display: none;
 }
+body, ul{
+  margin: 0;
+  padding: 0;
+}
+li{
+  list-style: none;
+}

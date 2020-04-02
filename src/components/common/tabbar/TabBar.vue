@@ -20,6 +20,8 @@
   bottom: 0;
   height: 49px;
   box-shadow: 0 -1px 1px #cccccc;
+  z-index: 2;
+  background-color: #ffffff;
 }
 
 </style>

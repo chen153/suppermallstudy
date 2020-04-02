@@ -19,7 +19,7 @@
       path: String,
       activeColor: {
         type: String,
-        default: 'red'
+        default: '#ff699c'
       }
     },
     methods: {
@@ -45,7 +45,7 @@
 
 <style scoped>
 .active{
-  color: #ff131c;
+  color: #ff699c;
 }
 .tabbar-item{
   text-align: center;

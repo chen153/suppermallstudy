@@ -1,6 +1,6 @@
 <template>
     <div class="tab-controll">
-        <div class="tc-item" v-for="(item, index) in ['精选', '流行', '热卖']" :class="{active: index === isCount}"
+        <div class="tc-item" v-for="(item, index) in titles" :class="{active: index === isCount}"
             @click="tabControll(index)">
             <span>{{item}}</span>
         </div>
@@ -11,11 +11,8 @@
   export default {
     name: "TabControll",
     props: {
-      conTrolData:{
-        type: Array,
-        default(){
-          return []
-        }
+      titles: {
+        type: Array
       }
     },
     data(){
@@ -37,6 +34,8 @@
     justify-content: center;
     position: sticky;
     top: 49px;
+    background-color: #ffffff;
+    z-index: 1;
 }
 .tab-controll .tc-item{
     flex: 1;

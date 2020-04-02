@@ -13,7 +13,10 @@
         </a>
       </div>
     </HomeCategory>
-    <TabControll></TabControll>
+    <TabControll :titles="titles"></TabControll>
+    <TabControlData :goods="goods">
+
+    </TabControlData>
   </div>
 </template>
 
@@ -23,16 +26,18 @@
   import NavBar from "../../components/common/navbar/NavBar";
   import HomeCategory from "./content/HomeCategory";
   import TabControll from "../../components/content/TabControll";
+  import TabControlData from "../../components/content/TabControlData";
 
   export default {
     name: "Home",
     components: {
-      NavBar,HomeCategory,TabControll
+      NavBar,HomeCategory,TabControll,TabControlData
     },
     data (){
       return {
         'banner': [],
         'keywords': [],
+        'titles': ['流行', '精选', '热卖'],
         'goods': {
           'pop': {page: 0, list: []},
           'news': {page: 0, list: []},
@@ -43,7 +48,7 @@
     created() {
       this.homeMultiData();
       this.homeGoods('pop');
-      this.homeGoods('news');
+      // this.homeGoods('news');
       this.homeGoods('sell');
     },
     methods: {
@@ -54,10 +59,10 @@
       },
       homeGoods(type){
         let page = this.goods[type].page + 1;
-        getHomeGoods('pop', 1).then(res => {
+        getHomeGoods(type, page).then(res => {
           this.goods[type].list.push(...res.data.list);
           this.goods[type].page += 1;
-          console.log(this.keywords);
+          console.log(res);
         });
       }
     }
