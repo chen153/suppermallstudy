@@ -7,7 +7,8 @@
           <a :href="gl.link">{{gl.title}}</a>
           <p class="gl-descr">
             <span class="gl-price">{{gl.orgPrice}}</span>
-            <img src="~assets/images/home/cfav.svg" alt="">
+            <span class="gl-cfav-svg"></span>
+<!--            <img src="~assets/images/home/cfav.svg" alt="">-->
             <span class="gl-cfav">
               {{gl.cfav}}
             </span>
@@ -64,23 +65,28 @@
   padding: 0 5px;
 }
 .gl-item .gl-descr{
-  display: flex;
   margin: 0;
   font-size: 12px;
   line-height: 20px;
-  justify-content: center;
+  text-align: center;
 }
 .gl-item .gl-price{
   color: red;
   padding-right: 15px;
   display: inline-block;
-}
-.gl-item .gl-descr img{
-  width: 20px;
   vertical-align: middle;
+}
+.gl-item .gl-cfav-svg{
+  display: inline-block;
+  width: 16px;
+  height: 18px;
+  background-size: 16px 16px;
+  vertical-align: middle;
+  background-image: url("~assets/images/home/cfav.svg");
+  background-repeat: no-repeat;
 }
 .gl-item .gl-cfav{
   display: inline-block;
-  line-height: 20px;
+  vertical-align: middle;
 }
 </style>

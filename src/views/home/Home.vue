@@ -15,9 +15,7 @@
       </div>
     </HomeCategory>
     <TabControll :titles="titles"></TabControll>
-    <TabControlData :goods="goods">
-
-    </TabControlData>
+    <TabControlData :goods="goods"></TabControlData>
   </div>
 </template>
 
