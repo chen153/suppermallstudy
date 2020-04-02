@@ -1,41 +1,46 @@
 <template>
-    <swiper ref="mySwiper" :options="swiperOptions">
-        <swiper-slide>Slide 1</swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-        <swiper-slide>Slide 4</swiper-slide>
-        <swiper-slide>Slide 5</swiper-slide>
+    <Swiper :options="swiperOption">
+        <swiper-slide v-for="(item, index) in banner" :key="index">
+            <img :src="item.image" alt="">
+        </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
-    </swiper>
+    </Swiper>
 </template>
 
 <script>
-  import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-  import 'swiper/css/swiper.css'
+  // 局部引用
+  import { Swiper,SwiperSlide } from 'vue-awesome-swiper'
+  import '../../assets/lib/swiper.min.css'
   export default {
-    name: 'carrousel',
+    name: 'Carrousel',
+    props: {
+        banner: {
+            type: Array
+        },
+    },
+    components: {
+        Swiper,
+        SwiperSlide
+    },
     data() {
       return {
-        swiperOptions: {
-          pagination: {
-            el: '.swiper-pagination'
-          },
-          // Some Swiper option/callback...
-        }
+          swiperOption:{
+              slidesPerView: 'auto',
+              centeredSlides:true,
+              spaceBetween: 10,
+              loop:true,
+              speed:600, //config参数同swiper4,与官网一致
+          }
       }
-    },
-    computed: {
-      swiper() {
-        return this.$refs.mySwiper.$swiper
-      }
-    },
-    mounted() {
-      console.log('Current Swiper instance object', this.swiper)
-      this.swiper.slideTo(3, 1000, false)
-    }
+  }
   }
 </script>
 
 <style scoped>
-
+.swiper-container{
+    top: 49px;
+}
+.swiper-wrapper .swiper-slide img{
+    width: 100%;
+}
 </style>

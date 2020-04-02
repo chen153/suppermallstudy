@@ -5,6 +5,7 @@
         <span>购物街</span>
       </div>
     </NavBar>
+    <Carrousel :banner="banner"></Carrousel>
     <HomeCategory>
       <div class="hc-item" v-for="(item, index) in keywords" :key="index">
         <a :href="item.link">
@@ -27,11 +28,12 @@
   import HomeCategory from "./content/HomeCategory";
   import TabControll from "../../components/content/TabControll";
   import TabControlData from "../../components/content/TabControlData";
+  import Carrousel from '../../components/lib/Swiper'
 
   export default {
     name: "Home",
     components: {
-      NavBar,HomeCategory,TabControll,TabControlData
+      NavBar,Carrousel,HomeCategory,TabControll,TabControlData
     },
     data (){
       return {
@@ -54,7 +56,9 @@
     methods: {
       homeMultiData(){
         getHomeMultiData().then(res => {
-          this.keywords = res.data.recommend.list
+          console.log(res.data.banner.list);
+          this.keywords = res.data.recommend.list;
+          this.banner = res.data.banner.list;
         });
       },
       homeGoods(type){
@@ -62,7 +66,7 @@
         getHomeGoods(type, page).then(res => {
           this.goods[type].list.push(...res.data.list);
           this.goods[type].page += 1;
-          console.log(res);
+          // console.log(res);
         });
       }
     }
