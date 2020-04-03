@@ -14,8 +14,8 @@
         </a>
       </div>
     </HomeCategory>
-    <TabControll :titles="titles"></TabControll>
-    <TabControlData :goods="goods"></TabControlData>
+    <TabControll :titles="titles" @tabControll="tabConClick"></TabControll>
+    <TabControlData :goods="goods[currenType]"></TabControlData>
   </div>
 </template>
 
@@ -35,6 +35,7 @@
     },
     data (){
       return {
+        'currenType': 'pop',
         'banner': [],
         'keywords': [],
         'titles': ['流行', '精选', '热卖'],
@@ -42,7 +43,8 @@
           'pop': {page: 0, list: []},
           'news': {page: 0, list: []},
           'sell': {page: 0, list: []},
-        }
+        },
+
       }
     },
     created() {
@@ -64,8 +66,22 @@
         getHomeGoods(type, page).then(res => {
           this.goods[type].list.push(...res.data.list);
           this.goods[type].page += 1;
-          // console.log(res);
         });
+      },
+      tabConClick(index){
+        console.log(this.currenType);
+        console.log(index);
+        switch (index) {
+          case index = 0:
+            this.currenType = 'pop';
+            break;
+          case index = 1:
+            this.currenType = 'news';
+            break;
+          case index = 2:
+            this.currenType = 'sell';
+            break;
+        }
       }
     }
   }

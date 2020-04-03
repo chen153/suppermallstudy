@@ -22,7 +22,8 @@
     },
     methods: {
       tabControll(index){
-        this.isCount = index
+        this.isCount = index;
+          this.$emit('tabControll', index);
       }
     }
   }

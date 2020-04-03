@@ -9,7 +9,7 @@
 
 <script>
   // 局部引用
-  import { Swiper,SwiperSlide } from 'vue-awesome-swiper'
+  import { Swiper,SwiperSlide,directive  } from 'vue-awesome-swiper'
   import '../../assets/lib/swiper.min.css'
   export default {
     name: 'Carrousel',
@@ -31,7 +31,7 @@
               loop:true,
               speed:600, //config参数同swiper4,与官网一致
           }
-      }
+    }
   }
   }
 </script>
