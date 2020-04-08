@@ -5,17 +5,20 @@
         <span>购物街</span>
       </div>
     </NavBar>
-    <Carrousel :banner="banner"></Carrousel>
-    <HomeCategory>
-      <div class="hc-item" v-for="(item, index) in keywords" :key="index">
-        <a :href="item.link">
-          <img :src="item.image" alt="">
-          <span>{{item.title}}</span>
-        </a>
-      </div>
-    </HomeCategory>
-    <TabControll :titles="titles" @tabControll="tabConClick"></TabControll>
-    <TabControlData :goods="goods[currenType]"></TabControlData>
+    <Scroll class="content" ref="scroll" @scroll="getScrollPosition(position)">
+      <Carrousel :banner="banner"></Carrousel>
+      <HomeCategory>
+        <div class="hc-item" v-for="(item, index) in keywords" :key="index">
+          <a :href="item.link">
+            <img :src="item.image" alt="">
+            <span>{{item.title}}</span>
+          </a>
+        </div>
+      </HomeCategory>
+      <TabControll :titles="titles" @tabControll="tabConClick"></TabControll>
+      <TabControlData :goods="goods[currenType]"></TabControlData>
+    </Scroll>
+    <GoTop @click.native="goTop"></GoTop>
   </div>
 </template>
 
@@ -27,14 +30,23 @@
   import TabControll from "../../components/content/TabControll";
   import TabControlData from "../../components/content/TabControlData";
   import Carrousel from '../../components/lib/Swiper'
+  import Scroll from '../../components/common/scroll/Scroll'
+  import GoTop from '../../components/common/GoTop'
 
   export default {
     name: "Home",
     components: {
-      NavBar,Carrousel,HomeCategory,TabControll,TabControlData
+      NavBar,
+      Scroll,
+      Carrousel,
+      HomeCategory,
+      TabControll,
+      TabControlData,
+      GoTop
     },
     data (){
       return {
+        'probeType': 3,
         'currenType': 'pop',
         'banner': [],
         'keywords': [],
@@ -44,7 +56,7 @@
           'news': {page: 0, list: []},
           'sell': {page: 0, list: []},
         },
-
+        // 'position': null,
       }
     },
     created() {
@@ -56,7 +68,6 @@
     methods: {
       homeMultiData(){
         getHomeMultiData().then(res => {
-          console.log(res.data.banner.list);
           this.keywords = res.data.recommend.list;
           this.banner = res.data.banner.list;
         });
@@ -69,8 +80,6 @@
         });
       },
       tabConClick(index){
-        console.log(this.currenType);
-        console.log(index);
         switch (index) {
           case index = 0:
             this.currenType = 'pop';
@@ -82,12 +91,29 @@
             this.currenType = 'sell';
             break;
         }
+      },
+      goTop(){
+        this.$refs.scroll.scrollTo(0, 0, 500)
+      },
+      getScrollPosition(position){
+        console.log(position);
+        // this.position = position;
       }
     }
   }
 </script>
 
 <style scoped>
+.content{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+/*.content{*/
+/*  height: calc(100% - 98px);*/
+/*  width: 100%;*/
+/*  overflow: hidden;*/
+/*}*/
 .hc-item{
   width: 25%;
   text-align: center;

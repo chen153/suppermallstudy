@@ -1,5 +1,5 @@
 <template>
-    <div class="tab-controll">
+    <div class="tab-controll" :style="{'tab-controll-ac': navBarFixed}" >
         <div class="tc-item" v-for="(item, index) in titles" :class="{active: index === isCount}"
             @click="tabControll(index)">
             <span>{{item}}</span>
@@ -8,6 +8,7 @@
 </template>
 
 <script>
+  import BScroll from 'better-scroll'
   export default {
     name: "TabControll",
     props: {
@@ -17,14 +18,28 @@
     },
     data(){
       return {
-        isCount: 0
+        isCount: 0,
+        bs: null,
+        navBarFixed: false
       }
     },
     methods: {
       tabControll(index){
         this.isCount = index;
           this.$emit('tabControll', index);
+      },
+      watchScroll () {
+        let scrollTop = document.querySelector('.tab-controll').offsetTop;
+        //  当滚动超过 50 时，实现吸顶效果
+        if (scrollTop > 387) {
+          this.navBarFixed = true
+        } else {
+          this.navBarFixed = false
+        }
       }
+    },
+    mounted() {
+      document.querySelector('.tab-controll').addEventListener('scroll', this.watchScroll)
     }
   }
 </script>
@@ -36,7 +51,10 @@
     position: sticky;
     top: 49px;
     background-color: #ffffff;
-    z-index: 1;
+    z-index: 9;
+}
+.tab-controll-ac{
+    position: fixed;
 }
 .tab-controll .tc-item{
     flex: 1;

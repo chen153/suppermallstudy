@@ -5,22 +5,22 @@
       <TabBarItem path="/home">
         <img slot="tab-icon" src="~assets/images/tabbar/home.svg" alt="">
         <img slot="tab-icon-active" src="~assets/images/tabbar/home_active.svg" alt="">
-        <div slot="tab-title">Home</div>
+        <div slot="tab-title">首页</div>
       </TabBarItem>
       <TabBarItem path="/category">
         <img slot="tab-icon" src="~assets/images/tabbar/category.svg" alt="">
         <img slot="tab-icon-active" src="~assets/images/tabbar/category_active.svg" alt="">
-        <div slot="tab-title">Category</div>
+        <div slot="tab-title">分类</div>
       </TabBarItem>
       <TabBarItem path="/cart">
         <img slot="tab-icon" src="~assets/images/tabbar/cart.svg" alt="">
         <img slot="tab-icon-active" src="~assets/images/tabbar/cart_active.svg" alt="">
-        <div slot="tab-title">Cart</div>
+        <div slot="tab-title">购物车</div>
       </TabBarItem>
       <TabBarItem path="/profile">
         <img slot="tab-icon" src="~assets/images/tabbar/my.svg" alt="">
         <img slot="tab-icon-active" src="~assets/images/tabbar/my_active.svg" alt="">
-        <div slot="tab-title">My</div>
+        <div slot="tab-title">我的</div>
       </TabBarItem>
     </tab-bar>
   </div>

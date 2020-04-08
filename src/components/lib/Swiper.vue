@@ -1,7 +1,9 @@
 <template>
     <Swiper :options="swiperOption">
         <swiper-slide v-for="(item, index) in banner" :key="index">
-            <img :src="item.image" alt="">
+            <a href="item.link">
+                <img :src="item.image" alt="">
+            </a>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
     </Swiper>
@@ -25,11 +27,14 @@
     data() {
       return {
           swiperOption:{
-              slidesPerView: 'auto',
-              centeredSlides:true,
-              spaceBetween: 10,
+            initialSlide: 1,
+              autoplay: true,
               loop:true,
-              speed:600, //config参数同swiper4,与官网一致
+              speed: 500,
+              pagination: {
+                el: ".swiper-pagination",
+                clickable: true
+              }
           }
     }
   }

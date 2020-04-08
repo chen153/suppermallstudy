@@ -1,7 +1,7 @@
 import originAxios from 'axios'
 export default function axios(config) {
   const instance = originAxios.create({
-    baseURL: '',
+    baseURL: 'http://152.136.185.210:8000/api/h8',
     timeout: 5000,
     headers: '',
   });
