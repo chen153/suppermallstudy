@@ -3,8 +3,8 @@
 <!--    <div class="tcd-item" v-for="(item, index) in goods" :key="index">-->
     <div class="tcd-item">
       <ul class="gl-ul">
-        <li class="gl-item" v-for="(gl, index2) in goods.list" :key="index2">
-          <img :src="gl.show.img" alt="" class="gl-descr-img">
+        <li class="gl-item" v-for="(gl, index2) in goods.list" :key="index2" >
+          <img :src="gl.show.img" alt="" class="gl-descr-img" @load="imageLoad">
           <a :href="gl.link">{{gl.title}}</a>
           <p class="gl-descr">
             <span class="gl-price">{{gl.orgPrice}}</span>
@@ -34,6 +34,11 @@
     data(){
       return {
         scroll: null,
+      }
+    },
+    methods: {
+      imageLoad(){
+        this.$bus.$emit('imageLoadRef');
       }
     },
     mounted() {

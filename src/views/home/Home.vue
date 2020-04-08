@@ -69,7 +69,26 @@
       this.homeGoods('new');
       this.homeGoods('sell');
     },
+    mounted() {
+      let refresh = this.debounce(this.$refs.scroll.refresh, 100);
+      this.$bus.$on('imageLoadRef', () => {
+        // console.log('~~~~~~~')
+        // this.$refs.scroll.refresh();
+        refresh();
+      })
+    },
     methods: {
+      debounce(func, delay){
+        let timer = null;
+        return function (...args) {
+          if(timer){
+            clearTimeout(timer);
+          }
+          timer = setTimeout(() => {
+            func.apply(this, args)
+          }, delay)
+        }
+      },
       homeMultiData(){
         getHomeMultiData().then(res => {
           this.keywords = res.data.recommend.list;
