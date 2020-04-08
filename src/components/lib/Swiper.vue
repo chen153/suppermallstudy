@@ -26,10 +26,13 @@
       return {
           swiperOption:{
               slidesPerView: 'auto',
-              centeredSlides:true,
+              centeredSlides: true,
               spaceBetween: 10,
-              loop:true,
-              speed:600, //config参数同swiper4,与官网一致
+              loop: true,
+              speed: 600, //config参数同swiper4,与官网一致
+              pagination: '.swiper-pagination',
+              nextButton: '.swiper-button-next',
+              prevButton: '.swiper-button-prev',
           }
     }
   }
