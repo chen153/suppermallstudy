@@ -1,11 +1,15 @@
 <template>
-  <div id="home">
+  <div id="home" ref="home">
     <NavBar>
       <div slot="nav-middle" class="navbar-item">
         <span>购物街</span>
       </div>
     </NavBar>
-    <Scroll class="content" ref="scroll" @scroll="getScrollPosition(position)">
+    <Scroll class="content" ref="scroll"
+            @scroll="contentScroll"
+            :probe-type="3"
+            :pull-up-load="true"
+            @pullingUp="loadMore">
       <Carrousel :banner="banner"></Carrousel>
       <HomeCategory>
         <div class="hc-item" v-for="(item, index) in keywords" :key="index">
@@ -18,7 +22,7 @@
       <TabControll :titles="titles" @tabControll="tabConClick"></TabControll>
       <TabControlData :goods="goods[currenType]"></TabControlData>
     </Scroll>
-    <GoTop @click.native="goTop"></GoTop>
+    <GoTop @click.native="goTop" v-show="isGoTop"></GoTop>
   </div>
 </template>
 
@@ -53,16 +57,16 @@
         'titles': ['流行', '精选', '热卖'],
         'goods': {
           'pop': {page: 0, list: []},
-          'news': {page: 0, list: []},
+          'new': {page: 0, list: []},
           'sell': {page: 0, list: []},
         },
-        // 'position': null,
+        isGoTop: false
       }
     },
     created() {
       this.homeMultiData();
       this.homeGoods('pop');
-      // this.homeGoods('news');
+      this.homeGoods('new');
       this.homeGoods('sell');
     },
     methods: {
@@ -77,6 +81,7 @@
         getHomeGoods(type, page).then(res => {
           this.goods[type].list.push(...res.data.list);
           this.goods[type].page += 1;
+          this.$refs.scroll.finishPullUp();
         });
       },
       tabConClick(index){
@@ -85,7 +90,7 @@
             this.currenType = 'pop';
             break;
           case index = 1:
-            this.currenType = 'news';
+            this.currenType = 'new';
             break;
           case index = 2:
             this.currenType = 'sell';
@@ -95,9 +100,12 @@
       goTop(){
         this.$refs.scroll.scrollTo(0, 0, 500)
       },
-      getScrollPosition(position){
-        console.log(position);
-        // this.position = position;
+      contentScroll(position){
+        this.isGoTop = -position.y > 1000;
+      },
+      loadMore(){
+        this.homeGoods(this.currenType);
+        this.$refs.scroll.refresh();
       }
     }
   }
@@ -105,9 +113,11 @@
 
 <style scoped>
 .content{
-  height: 100%;
-  width: 100%;
   position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 49px;
+  overflow: hidden;
 }
 /*.content{*/
 /*  height: calc(100% - 98px);*/

@@ -34,7 +34,12 @@
               pagination: {
                 el: ".swiper-pagination",
                 clickable: true
-              }
+              },
+              slidesPerView: 'auto',
+              centeredSlides: true,
+              spaceBetween: 10,
+              nextButton: '.swiper-button-next',
+              prevButton: '.swiper-button-prev',
           }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="tcd-content">
+  <div class="tcd-content" ref="wrapper">
 <!--    <div class="tcd-item" v-for="(item, index) in goods" :key="index">-->
     <div class="tcd-item">
       <ul class="gl-ul">
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+  import BScroll from 'better-scroll'
   export default {
     name: "TabControlData",
     props: {
@@ -29,6 +30,18 @@
           return []
         }
       }
+    },
+    data(){
+      return {
+        scroll: null,
+      }
+    },
+    mounted() {
+      this.scroll = new BScroll(this.$refs.wrapper, {
+        click: true,
+        probeType: 3,
+        pullUpLoad: true
+      })
     }
   }
 </script>
@@ -36,7 +49,6 @@
 <style scoped>
 .tcd-content{
   overflow: hidden;
-  padding-bottom: 49px;
 }
 .tcd-item ul{
   display: flex;
