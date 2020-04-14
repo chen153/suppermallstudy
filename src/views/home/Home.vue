@@ -5,6 +5,7 @@
         <span>购物街</span>
       </div>
     </NavBar>
+    <TabControll :titles="titles" @tabControll="tabConClick" ref="tabcontroll" v-show="tcfBool" :class="{tcfixed: tcfBool}"></TabControll>
     <Scroll class="content" ref="scroll"
             @scroll="contentScroll"
             :probe-type="3"
@@ -19,7 +20,7 @@
           </a>
         </div>
       </HomeCategory>
-      <TabControll :titles="titles" @tabControll="tabConClick"></TabControll>
+      <TabControll :titles="titles" @tabControll="tabConClick" ref="tabcontroll" ></TabControll>
       <TabControlData :goods="goods[currenType]"></TabControlData>
     </Scroll>
     <GoTop @click.native="goTop" v-show="isGoTop"></GoTop>
@@ -60,7 +61,9 @@
           'new': {page: 0, list: []},
           'sell': {page: 0, list: []},
         },
-        isGoTop: false
+        isGoTop: false,
+        tcOffsetTop: 0,
+        tcfBool: false,
       }
     },
     created() {
@@ -120,7 +123,13 @@
         this.$refs.scroll.scrollTo(0, 0, 500)
       },
       contentScroll(position){
+        this.tcOffsetTop = this.$refs.tabcontroll.$el.offsetTop;
         this.isGoTop = -position.y > 1000;
+        if(-position.y >= this.tcOffsetTop){
+          this.tcfBool = true;
+        }else if(-position.y < this.tcOffsetTop){
+          this.tcfBool = false;
+        }
       },
       loadMore(){
         this.homeGoods(this.currenType);
@@ -131,6 +140,10 @@
 </script>
 
 <style scoped>
+.tcfixed{
+  position: fixed;
+  width: 100%;
+}
 .content{
   position: absolute;
   width: 100%;
